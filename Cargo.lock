@@ -4,7 +4,7 @@ version = 4
 
 [[package]]
 name = "couch-denon"
-version = "0.1.1"
+version = "0.2.0"
 dependencies = [
  "couch-plugin",
  "couch-sdk",
@@ -15,7 +15,7 @@ dependencies = [
 [[package]]
 name = "couch-model"
 version = "0.1.0"
-source = "git+https://github.com/dangerouslaser/couch.git?rev=5e0cc20adad6ea54032002a8adf0888e80499bca#5e0cc20adad6ea54032002a8adf0888e80499bca"
+source = "git+https://github.com/dangerouslaser/couch.git?rev=f274804c5219db00446f1b9e5ce46391adcfd37c#f274804c5219db00446f1b9e5ce46391adcfd37c"
 dependencies = [
  "serde",
 ]
@@ -23,7 +23,7 @@ dependencies = [
 [[package]]
 name = "couch-plugin"
 version = "0.1.0"
-source = "git+https://github.com/dangerouslaser/couch.git?rev=5e0cc20adad6ea54032002a8adf0888e80499bca#5e0cc20adad6ea54032002a8adf0888e80499bca"
+source = "git+https://github.com/dangerouslaser/couch.git?rev=f274804c5219db00446f1b9e5ce46391adcfd37c#f274804c5219db00446f1b9e5ce46391adcfd37c"
 dependencies = [
  "couch-sdk",
  "libc",
@@ -34,7 +34,7 @@ dependencies = [
 [[package]]
 name = "couch-sdk"
 version = "0.1.0"
-source = "git+https://github.com/dangerouslaser/couch.git?rev=5e0cc20adad6ea54032002a8adf0888e80499bca#5e0cc20adad6ea54032002a8adf0888e80499bca"
+source = "git+https://github.com/dangerouslaser/couch.git?rev=f274804c5219db00446f1b9e5ce46391adcfd37c#f274804c5219db00446f1b9e5ce46391adcfd37c"
 dependencies = [
  "couch-model",
  "serde",
@@ -122,9 +122,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "3.0.4"
+version = "3.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e6275cddf4610d1775e6d1fe9469b2e77d0f39fd98fb7450901b821e0c53649f"
+checksum = "8593e8e72159ed2257d083c7a454a85cbf854f37a0966d8d483aff8c8a3ebcee"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -133,9 +133,9 @@ dependencies = [
 
 [[package]]
 name = "unicode-ident"
-version = "1.0.24"
+version = "1.0.25"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
+checksum = "ab72a15cf68d77cb0987d3684aa8a45c5ef827e8cb49ee2f30bfd7ba2feb519f"
 
 [[package]]
 name = "zmij"

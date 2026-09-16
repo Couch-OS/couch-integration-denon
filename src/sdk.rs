@@ -67,6 +67,24 @@ impl DeviceClient for Client {
         ]
     }
 
+    fn actions() -> &'static [couch_sdk::PluginActionSchema] {
+        &[couch_sdk::PluginActionSchema::SetVolumeDb {
+            min_tenths: -800,
+            max_tenths: 180,
+            step_tenths: 5,
+        }]
+    }
+
+    fn execute_action(&mut self, action: couch_sdk::TypedAction) -> couch_sdk::Result<()> {
+        Self::validate_action(action)?;
+        match action {
+            couch_sdk::TypedAction::SetVolumeDb { tenths } => {
+                Client::command(self, Command::VolumeDb(f32::from(tenths) / 10.0))?;
+                Ok(())
+            }
+        }
+    }
+
     fn connect(settings: &Settings) -> couch_sdk::Result<Self> {
         Client::connect(settings).map_err(Into::into)
     }
@@ -96,15 +114,20 @@ impl DeviceClient for Client {
         Ok(())
     }
 
-    /// Volume is deliberately absent: this receiver reports decibels, not a
-    /// percentage, and inventing one would mean inventing its range too.
-    /// `couch_denon::State` keeps the real reading for callers that want it.
+    /// Percentage volume stays absent; preserve the measured dB/minimum state.
     fn status(&mut self) -> couch_sdk::Result<Status> {
         let state = Client::status(self)?;
         let mut status = Status::default();
         status.on = state.on;
         status.muted = state.muted;
         status.input = state.input;
+        status.volume_db = if state.volume_minimum {
+            Some(couch_sdk::VolumeDb::Minimum)
+        } else {
+            state.volume_db.map(|db| couch_sdk::VolumeDb::Reading {
+                tenths: (db * 10.0).round() as i16,
+            })
+        };
         Ok(status)
     }
 
@@ -119,7 +142,7 @@ impl DeviceClient for Client {
     /// `Function::supports(&Integration::Denon { .. })`, minus the empty
     /// string, which the wire encoder rejects anyway.
     fn supports_input(id: &str) -> bool {
-        !id.is_empty()
+        couch_sdk::couch_model::commands::valid_input_id(id)
             && id.len() <= 25
             && id
                 .bytes()
@@ -223,6 +246,27 @@ mod tests {
         assert_eq!(
             status.volume, None,
             "a decibel reading must not be reported as a percentage"
+        );
+    }
+
+    #[test]
+    fn a_persisted_denon_input_binding_uses_the_receiver_token_unchanged() {
+        let host = avr(Script::new()
+            .on("SISAT/CBL", Reply::line("SISAT/CBL"))
+            .on("SI?", Reply::line("SISAT/CBL")));
+        let mut client = <Client as DeviceClient>::connect(&settings(&host)).unwrap();
+
+        let function = Function::parse("input:SAT/CBL").expect("a persisted input binding");
+        assert!(<Client as DeviceClient>::supports(&function));
+        assert_eq!(
+            DeviceClient::command(&mut client, "input:SAT/CBL"),
+            Ok(()),
+            "the SDK adapter must preserve a source token accepted by the native AVR client"
+        );
+        assert_eq!(
+            host.requests(),
+            ["SISAT/CBL", "SI?"],
+            "the input is sent once and confirmed with its own status prefix"
         );
     }
 
