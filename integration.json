@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "protocol_version": 1,
+  "id": "denon",
+  "tier": "preview",
+  "synthetic": false,
+  "cargo_manifest": "Cargo.toml",
+  "cargo_package": "couch-denon",
+  "binary": "couch-plugin-denon",
+  "manifest": "plugin.json"
+}
