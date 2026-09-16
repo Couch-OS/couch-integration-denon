@@ -18,6 +18,7 @@ file and Git revision are both part of review.
 ```sh
 cargo test --locked
 cargo build --locked --release --bin couch-plugin-denon
+cargo build --locked --release --target armv7-unknown-linux-musleabihf --bin couch-plugin-denon
 cargo fmt -- --check
 ```
 
