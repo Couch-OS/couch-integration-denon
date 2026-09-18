@@ -5,6 +5,13 @@ Couch. It controls the receiver's main zone over Denon's CR-delimited TCP
 protocol and exposes power, volume, mute, and input selection through Couch's
 versioned subprocess protocol.
 
+The `0.2.0` source is a **protocol-v2 preview**. It requires a Couch core that
+supports protocol version 2, first released as `v0.1.0-alpha.20260918.177`; an
+older, protocol-v1 host rejects it. Its typed dB reading and absolute-volume control have only
+mock-receiver coverage. The earlier `0.1.1` package's read-only hardware
+observations do not validate this candidate; record receiver model, firmware,
+and command results before any release review.
+
 The native implementation also remains in the Couch monorepo while independent
 package distribution is introduced. Keep the two implementations byte-for-byte
 aligned until the monorepo copy is deliberately retired.
@@ -40,6 +47,11 @@ the executable. A release becomes publishable only after the feed pins this
 repository at a full commit and its unprivileged admission workflow succeeds.
 The protected feed job signs the admitted binary later; this repository has no
 signing key and cannot publish an official package by itself.
+
+The checked-in metadata deliberately declares protocol and minimum core
+protocol version 2, and marks hardware validation as `not-tested`. It is source
+preparation only: do not create a feed entry, tag, release, sign, or install it
+until Couch protocol v2 ships and the stated hardware evidence exists.
 
 ## Receiver setup
 
