@@ -5,9 +5,9 @@ Couch. It controls the receiver's main zone over Denon's CR-delimited TCP
 protocol and exposes power, volume, mute, and input selection through Couch's
 versioned subprocess protocol.
 
-The `0.2.0` source is an **unreleased protocol-v2 preview**. It requires a
-Couch core that supports protocol version 2, so a published protocol-v1 host
-will reject it. Its typed dB reading and absolute-volume control have only
+The `0.2.0` source is a **protocol-v2 preview**. It requires a Couch core that
+supports protocol version 2, first released as `v0.1.0-alpha.20260918.177`; an
+older, protocol-v1 host rejects it. Its typed dB reading and absolute-volume control have only
 mock-receiver coverage. The earlier `0.1.1` package's read-only hardware
 observations do not validate this candidate; record receiver model, firmware,
 and command results before any release review.

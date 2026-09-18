@@ -4,20 +4,20 @@ version = "0.2.0"
 edition = "2021"
 license = "GPL-3.0-or-later"
 description = "Denon AVR main-zone control for Couch"
-repository = "https://github.com/dangerouslaser/couch-integration-denon"
+repository = "https://github.com/Couch-OS/couch-integration-denon"
 
 [dependencies]
 # Protocol types and the device SDK stay owned by Couch. Pinning the same
 # immutable Couch revision here prevents an independent integration release
 # from silently changing its host contract.
-couch-plugin = { git = "https://github.com/dangerouslaser/couch.git", rev = "f274804c5219db00446f1b9e5ce46391adcfd37c" }
-couch-sdk = { git = "https://github.com/dangerouslaser/couch.git", rev = "f274804c5219db00446f1b9e5ce46391adcfd37c" }
+couch-plugin = { git = "https://github.com/Couch-OS/couch.git", rev = "00ab4da2e6336a925e93702507c0b7b233012738" }
+couch-sdk = { git = "https://github.com/Couch-OS/couch.git", rev = "00ab4da2e6336a925e93702507c0b7b233012738" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
 [dev-dependencies]
-couch-plugin = { git = "https://github.com/dangerouslaser/couch.git", rev = "f274804c5219db00446f1b9e5ce46391adcfd37c", features = ["testing"] }
-couch-sdk = { git = "https://github.com/dangerouslaser/couch.git", rev = "f274804c5219db00446f1b9e5ce46391adcfd37c", features = ["testing"] }
+couch-plugin = { git = "https://github.com/Couch-OS/couch.git", rev = "00ab4da2e6336a925e93702507c0b7b233012738", features = ["testing"] }
+couch-sdk = { git = "https://github.com/Couch-OS/couch.git", rev = "00ab4da2e6336a925e93702507c0b7b233012738", features = ["testing"] }
 
 [profile.release]
 opt-level = "s"

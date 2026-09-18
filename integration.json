@@ -10,7 +10,7 @@
   "binary": "couch-plugin-denon",
   "manifest": "plugin.json",
   "limitations": [
-    "Denon 0.2.0 uses the unreleased Couch protocol-v2 contract and cannot run on a protocol-v1 host.",
+    "Denon 0.2.0 uses the Couch protocol-v2 contract, first released in v0.1.0-alpha.20260918.177, and cannot run on a protocol-v1 host.",
     "The client controls the receiver main zone only."
   ],
   "hardware_validation": {
