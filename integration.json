@@ -1,21 +1,11 @@
 {
   "schema": 1,
   "protocol_version": 2,
-  "min_core_protocol_version": 2,
   "id": "denon",
   "tier": "preview",
   "synthetic": false,
   "cargo_manifest": "Cargo.toml",
   "cargo_package": "couch-denon",
   "binary": "couch-plugin-denon",
-  "manifest": "plugin.json",
-  "limitations": [
-    "Denon 0.2.0 uses the Couch protocol-v2 contract, first released in v0.1.0-alpha.20260918.177, and cannot run on a protocol-v1 host.",
-    "The client controls the receiver main zone only."
-  ],
-  "hardware_validation": {
-    "status": "not-tested",
-    "evidence": [],
-    "notes": "This protocol-v2 preview has mock-receiver coverage only. The published 0.1.1 protocol-v1 package's read-only hardware observations do not validate this candidate."
-  }
+  "manifest": "plugin.json"
 }
