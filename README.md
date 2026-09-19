@@ -5,16 +5,31 @@ Couch. It controls the receiver's main zone over Denon's CR-delimited TCP
 protocol and exposes power, volume, mute, and input selection through Couch's
 versioned subprocess protocol.
 
-The `0.2.0` source is a **protocol-v2 preview**. It requires a Couch core that
+The `0.2.x` source is a **protocol-v2 preview**. It requires a Couch core that
 supports protocol version 2, first released as `v0.1.0-alpha.20260918.177`; an
 older, protocol-v1 host rejects it. Its typed dB reading and absolute-volume control have only
 mock-receiver coverage. The earlier `0.1.1` package's read-only hardware
 observations do not validate this candidate; record receiver model, firmware,
-and command results before any release review.
+and command results before any release review. `0.2.0` was exercised against one
+receiver on 2026-09-18 and 19 through a development remote - status, the named
+input list, an absolute volume write read back exactly, power, and held volume
+keys - but its model and firmware were not recorded, so the hardware status
+stays `not-tested`.
 
 The native implementation also remains in the Couch monorepo while independent
 package distribution is introduced. Keep the two implementations byte-for-byte
 aligned until the monorepo copy is deliberately retired.
+
+## Talking to the receiver
+
+The client keeps one connection open and the receiver reports every change to
+power, volume, mute and input on it as it happens, asked or not. A status
+therefore asks only for values it has not observed in the last ten seconds:
+a command ends by observing its own value, events keep the rest current, and
+a lost connection discards everything observed. Since `0.2.1` that makes a
+status after a volume step cost no question at all, where it used to cost four
+paced round trips (about a quarter of a second). The window is a guard against
+a model that stays silent about a change, not the mechanism.
 
 ## Build and test
 
